@@ -1,4 +1,4 @@
-package com.bikeapp.xueyi.domain;
+package com.bikeapp.xueyi.dto;
 
 
 import lombok.Builder;

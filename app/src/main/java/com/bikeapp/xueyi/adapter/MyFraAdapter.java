@@ -8,11 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bikeapp.xueyi.domain.Icon;
+import com.bikeapp.xueyi.dto.Icon;
 import com.bikeapp.xueyi.mybikeapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by XUEYI on 2015/12/11.
@@ -20,10 +23,12 @@ import java.util.List;
 public class MyFraAdapter extends BaseAdapter {
     private Context context;
     private List<Icon> mData;
+
     public MyFraAdapter(List<Icon> mData, Context context) {
         this.context = context;
-        this.mData=mData;
+        this.mData = mData;
     }
+
     @Override
     public int getCount() {
         return mData.size();
@@ -41,27 +46,31 @@ public class MyFraAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
         ViewHolder viewHolder;
-        if(convertView==null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_grid_icon, null);
-            viewHolder=new ViewHolder();
-            viewHolder.img_icon=(ImageView) view.findViewById(R.id.img_icon);
-            viewHolder.txt_icon=(TextView) view.findViewById(R.id.txt_icon);
-            view.setTag(viewHolder);
-        }else{
-            view=convertView;
-            viewHolder=(ViewHolder)view.getTag();
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_grid_icon, null);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        Icon icon= mData.get(position);
-        Picasso.with(context).load(icon.getId()).into(viewHolder.img_icon);
-        viewHolder.txt_icon.setText(icon.getName());
-        return view;
+        Icon icon = mData.get(position);
+        if (null != icon) {
+            Picasso.with(context).load(icon.getId()).into(viewHolder.img);
+            viewHolder.txt.setText(icon.getName());
+        }
+        return convertView;
     }
-    class ViewHolder{
-        ImageView img_icon;
-        TextView txt_icon;
+
+    static class ViewHolder {
+        @Bind(R.id.img_icon)
+        ImageView img;
+        @Bind(R.id.txt_icon)
+        TextView txt;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
-
 

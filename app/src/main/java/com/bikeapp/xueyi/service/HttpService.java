@@ -8,6 +8,7 @@ import com.bikeapp.xueyi.dto.Page;
 import com.bikeapp.xueyi.enums.CityEnum;
 
 import java.io.File;
+import java.util.Map;
 
 import retrofit.Call;
 import retrofit.http.Body;
@@ -17,6 +18,7 @@ import retrofit.http.POST;
 import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.http.QueryMap;
 
 
 /**
@@ -40,4 +42,9 @@ public interface HttpService {
     @GET("/bike/playGuide/listPlayGuide?sort=baiduPage,Asc&sort=id,Asc")
     Call<Page<PlayGuide>> listPlayGuide(@Query("page") Integer page, @Query("city") CityEnum city);
 
+    /**
+     * 注册
+     */
+    @POST("/bike/user/register")
+    Call<User> register(@QueryMap Map<String, Object> userMap);
 }

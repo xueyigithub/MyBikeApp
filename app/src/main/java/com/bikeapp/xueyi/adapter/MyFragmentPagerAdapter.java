@@ -20,11 +20,10 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private MineFragment mineFragment = null;
 
 
-
     public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         findFragment = new FindFragment();
-        weatherFragment= new WeatherFragment();
+        weatherFragment = new WeatherFragment();
         mineFragment = new MineFragment();
     }
 

@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.bikeapp.xueyi.adapter.MyFraAdapter;
-import com.bikeapp.xueyi.domain.Icon;
+import com.bikeapp.xueyi.dto.Icon;
 import com.bikeapp.xueyi.mybikeapp.R;
 
 import java.util.ArrayList;
@@ -18,37 +20,43 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 
 public class FindFragment extends Fragment {
     private List<Icon> mData = new ArrayList<>();
 
-    @Bind(R.id.grid_photo)GridView photo;
+    @Bind(R.id.grid_photo)
+    GridView photo;
+
+    @OnItemClick(R.id.grid_photo)
+    void photo(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(FindFragment.this.getActivity(), "你点击了~" + position + "~项", Toast.LENGTH_SHORT).show();
+
+    }
+
     /**
      * 校园指南，生活指南，游玩指南，就业指南，学生课表，失物招领
      */
-    @BindString(R.string.grid_campus)String campus;
-    @BindString(R.string.grid_life)String life;
-    @BindString(R.string.grid_play)String play;
-    @BindString(R.string.grid_job)String job;
-    @BindString(R.string.grid_schedule)String schedule;
-    @BindString(R.string.grid_lostandfind)String lostandfind;
+    @BindString(R.string.grid_campus)
+    String campus;
+    @BindString(R.string.grid_life)
+    String life;
+    @BindString(R.string.grid_play)
+    String play;
+    @BindString(R.string.grid_job)
+    String job;
+    @BindString(R.string.grid_schedule)
+    String schedule;
+    @BindString(R.string.grid_lostandfind)
+    String lostandfind;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_find, container, false);
-        ButterKnife.bind(this,view);
-
-        /*Icon icon1 = new Icon();
-        icon1.setId(R.mipmap.ic_launcher);
-        icon1.setName(campus);
-        mData.add(icon1);*/
-        /*Icon i = new Icon();
-        i.setId(R.mipmap.ic_launcher);
-        i.setName(campus);
-        mData.add(i);*/
+        View view = inflater.inflate(R.layout.fragment_find, container, false);
+        ButterKnife.bind(this, view);
 
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(campus).build());
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(life).build());
@@ -57,7 +65,7 @@ public class FindFragment extends Fragment {
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(schedule).build());
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(lostandfind).build());
 
-        photo.setAdapter(new MyFraAdapter(mData,getActivity()));
+        photo.setAdapter(new MyFraAdapter(mData, getActivity()));
         return view;
     }
 
