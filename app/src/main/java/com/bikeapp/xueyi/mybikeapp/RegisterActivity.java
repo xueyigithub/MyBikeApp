@@ -2,7 +2,6 @@ package com.bikeapp.xueyi.mybikeapp;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -24,7 +23,9 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
+    private static final String TAG = "RegisterActivity";
+
     /**
      * toolbar
      */
@@ -74,6 +75,9 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!password.equals(confirm_passward)) {
             Toast.makeText(this, "输入密码不匹配", Toast.LENGTH_SHORT).show();
         }
+        /**
+         * 写成一个对象，然后
+         */
         User userMap = User.builder().userName(userName).password(password).build();
         Call<User> callUser = CallService.service.register(MapUtils.getValueMap(userMap));
         callUser.enqueue(new Callback<User>() {

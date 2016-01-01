@@ -1,6 +1,7 @@
 package com.bikeapp.xueyi.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import butterknife.OnItemClick;
 
 
 public class FindFragment extends Fragment {
+    private Context mContext;
     private List<Icon> mData = new ArrayList<>();
 
     @Bind(R.id.grid_photo)
@@ -32,7 +34,6 @@ public class FindFragment extends Fragment {
     @OnItemClick(R.id.grid_photo)
     void photo(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(FindFragment.this.getActivity(), "你点击了~" + position + "~项", Toast.LENGTH_SHORT).show();
-
     }
 
     /**
@@ -57,7 +58,7 @@ public class FindFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_find, container, false);
         ButterKnife.bind(this, view);
-
+        mContext=getActivity();
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(campus).build());
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(life).build());
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(play).build());
@@ -65,7 +66,7 @@ public class FindFragment extends Fragment {
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(schedule).build());
         mData.add(Icon.builder().id(R.mipmap.ic_launcher).name(lostandfind).build());
 
-        photo.setAdapter(new MyFraAdapter(mData, getActivity()));
+        photo.setAdapter(new MyFraAdapter(mData, mContext));
         return view;
     }
 

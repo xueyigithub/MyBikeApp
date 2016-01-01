@@ -47,4 +47,9 @@ public interface HttpService {
      */
     @POST("/bike/user/register")
     Call<User> register(@QueryMap Map<String, Object> userMap);
+    /**
+     * listPlayGuide
+     */
+    @GET("/bike/playGuide/listPlayGuide?sort=baiduPage,Asc&sort=id,Asc")
+    Call<Page<PlayGuide>> listPlayGuide(@Query("page") Integer page, @QueryMap Map<String, Object> playGuideMap);
 }
