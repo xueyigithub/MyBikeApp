@@ -28,6 +28,26 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CampusNewsActivity"
+            android:label="@string/title_activity_campus_news"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StudyGuideActivity"
+            android:label="@string/title_activity_study_guide"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SingleStudyActivity"
+            android:label="@string/title_activity_single_study"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlayGuideActivity"
+            android:label="@string/title_activity_play_guide"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SinglePlayActivity"
+            android:label="@string/title_activity_single_play"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,8 +1,11 @@
 package com.bikeapp.xueyi.service;
 
 
+import com.bikeapp.xueyi.domain.CampusNews;
 import com.bikeapp.xueyi.domain.FileInfo;
+import com.bikeapp.xueyi.domain.LifeGuide;
 import com.bikeapp.xueyi.domain.PlayGuide;
+import com.bikeapp.xueyi.domain.StudyGuide;
 import com.bikeapp.xueyi.domain.User;
 import com.bikeapp.xueyi.dto.Page;
 import com.bikeapp.xueyi.enums.CityEnum;
@@ -47,9 +50,20 @@ public interface HttpService {
      */
     @POST("/bike/user/register")
     Call<User> register(@QueryMap Map<String, Object> userMap);
+
     /**
      * listPlayGuide
      */
     @GET("/bike/playGuide/listPlayGuide?sort=baiduPage,Asc&sort=id,Asc")
     Call<Page<PlayGuide>> listPlayGuide(@Query("page") Integer page, @QueryMap Map<String, Object> playGuideMap);
+
+    @GET("/bike/campusNews/listCampusNews?sort=border,Desc")
+    Call<Page<CampusNews>> listCampusNews(@Query("page") Integer page, @QueryMap Map<String, Object> campusNewsMap);
+
+    @GET("/bike/lifeGuide/listLifeGuide?sort=border,Desc")
+    Call<Page<LifeGuide>> listLifeGuide(@Query("page") Integer page, @QueryMap Map<String, Object> lifeGuideMap);
+
+    @GET("/bike/studyGuide/listStudyGuide?sort=originalTime,Desc")
+    Call<Page<StudyGuide>> listStudyGuide(@Query("page") Integer page);
+
 }

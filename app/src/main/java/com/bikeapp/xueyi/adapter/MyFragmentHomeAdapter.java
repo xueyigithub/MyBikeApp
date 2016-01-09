@@ -12,7 +12,7 @@ import com.bikeapp.xueyi.fragment.MineFragment;
 import com.bikeapp.xueyi.fragment.WeatherFragment;
 
 
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class MyFragmentHomeAdapter extends FragmentPagerAdapter {
 
     private final int PAGER_COUNT = 3;
     private FindFragment findFragment = null;
@@ -20,7 +20,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private MineFragment mineFragment = null;
 
 
-    public MyFragmentPagerAdapter(FragmentManager fm) {
+    public MyFragmentHomeAdapter(FragmentManager fm) {
         super(fm);
         findFragment = new FindFragment();
         weatherFragment = new WeatherFragment();

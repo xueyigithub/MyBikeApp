@@ -20,11 +20,11 @@ import butterknife.ButterKnife;
 /**
  * Created by XUEYI on 2015/12/11.
  */
-public class MyFraAdapter extends BaseAdapter {
+public class MyFindAdapter extends BaseAdapter {
     private Context context;
     private List<Icon> mData;
 
-    public MyFraAdapter(List<Icon> mData, Context context) {
+    public MyFindAdapter(List<Icon> mData, Context context) {
         this.context = context;
         this.mData = mData;
     }

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".HomeActivity" >
+    tools:context=".CampusNewsActivity" >
 
     <RadioGroup
         android:id="@+id/rg_tab_bar"
@@ -19,24 +17,18 @@
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/rb_find"
+            android:id="@+id/rb_in_news"
             style="@style/tab_menu_item"
             android:drawableTop="@mipmap/ic_launcher"
             android:button="@null"
-            android:text="@string/tab_menu_find" />
+            android:text="@string/school_in_news" />
 
         <RadioButton
-            android:id="@+id/rb_weather"
+            android:id="@+id/rb_out_news"
             style="@style/tab_menu_item"
             android:drawableTop="@mipmap/ic_launcher"
             android:button="@null"
-            android:text="@string/tab_menu_weather" />
-
-        <RadioButton
-            android:id="@+id/rb_mine"
-            style="@style/tab_menu_item"
-            android:drawableTop="@mipmap/ic_launcher"
-            android:text="@string/tab_menu_mine" />
+            android:text="@string/school_out_news" />
     </RadioGroup>
 
     <android.support.v4.view.ViewPager
@@ -45,8 +37,5 @@
         android:layout_above="@id/rg_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </RelativeLayout>
-
-
-
-

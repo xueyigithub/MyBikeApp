@@ -19,7 +19,8 @@ public class MineFragment extends Fragment {
     private Context mContext;
 
 
-    @OnClick(R.id.bt_exit_login)void exit_login(View v){
+    @OnClick(R.id.bt_exit_login)
+    void exit_login(View v) {
         startActivity(new Intent(mContext, MainActivity.class));
     }
 
@@ -29,7 +30,7 @@ public class MineFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        mContext=this.getContext();
-        return  view;
+        mContext = this.getContext();
+        return view;
     }
 }

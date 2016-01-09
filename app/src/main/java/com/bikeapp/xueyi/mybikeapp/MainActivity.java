@@ -64,6 +64,11 @@ public class MainActivity extends BaseActivity {
      */
     @BindString(R.string.toast_login)
     String toast_login;
+    /**
+     * 登录
+     */
+    @BindString(R.string.login)
+    String login;
 
     /**
      * 对登录进行操作
@@ -113,8 +118,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mToolbar.setTitle(login);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override

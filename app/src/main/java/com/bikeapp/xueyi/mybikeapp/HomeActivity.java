@@ -3,25 +3,24 @@ package com.bikeapp.xueyi.mybikeapp;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.bikeapp.xueyi.adapter.MyFragmentPagerAdapter;
+import com.bikeapp.xueyi.adapter.MyFragmentHomeAdapter;
 import com.bikeapp.xueyi.config.Consts;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity {
     private static final String TAG = "HomeActivity";
@@ -30,17 +29,6 @@ public class HomeActivity extends BaseActivity {
     String name;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
-
-    /**
-     * navigation
-     *
-     * @param view
-     */
-    @OnClick(R.id.fab)
-    void fab(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
 
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -57,32 +45,9 @@ public class HomeActivity extends BaseActivity {
     RadioButton weather;
     @Bind(R.id.rb_mine)
     RadioButton mine;
-    /**
-     * 实现按钮的转换
-     */
-    /*@Bind(R.id.rg_tab_bar)
-    RadioGroup mGroup;*/
-  /*  @OnCheckedChanged(R.id.rg_tab_bar)void tab_bar(View v){
-        switch(v.getId()) {
-            case R.id.rb_find:
-                if (vpager.getCurrentItem() != Consts.PAGE_ONE) {
-                    vpager.setCurrentItem(Consts.PAGE_ONE, true);
-                }
-                break;
-            case R.id.rb_weather:
-                if (vpager.getCurrentItem() != Consts.PAGE_TWO) {
-                    vpager.setCurrentItem(Consts.PAGE_TWO, true);
-                }
-                break;
-            case R.id.rb_mine:
-                if (vpager.getCurrentItem() != Consts.PAGE_THREE) {
-                    vpager.setCurrentItem(Consts.PAGE_THREE, true);
-                }
-                break;
-            default:
-                break;
-        }
-    }*/
+
+    @Bind(R.id.rg_tab_bar)
+    RadioGroup mGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +66,13 @@ public class HomeActivity extends BaseActivity {
             setupDrawerContent(navigationView);
         }
 
-       // mGroup.setOnCheckedChangeListener(onCheckedChangeListener);
+        mGroup.setOnCheckedChangeListener(onCheckedChangeListener);
         /**
          * 默认find为第一个界面
          */
         find.setChecked(true);
 
-        vpager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager()));
+        vpager.setAdapter(new MyFragmentHomeAdapter(getSupportFragmentManager()));
 
         vpager.addOnPageChangeListener(new PageChangeListener());
     }
@@ -125,9 +90,8 @@ public class HomeActivity extends BaseActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_found:
                                 if (vpager.getCurrentItem() != Consts.PAGE_ONE) {
-                                    vpager.setCurrentItem(Consts.PAGE_TWO, true);
+                                    vpager.setCurrentItem(Consts.PAGE_ONE, true);
                                 }
-
                                 break;
 
                             case R.id.nav_weather:
@@ -186,7 +150,7 @@ public class HomeActivity extends BaseActivity {
     /**
      * 实现了对按钮的点击事件
      */
-   /* private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+    private RadioGroup.OnCheckedChangeListener onCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             Log.d("RadioGroup", "OnCheckedChangeListener!!!");
@@ -211,7 +175,7 @@ public class HomeActivity extends BaseActivity {
             }
         }
     };
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
