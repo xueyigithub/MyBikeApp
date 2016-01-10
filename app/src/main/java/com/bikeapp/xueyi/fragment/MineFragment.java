@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bikeapp.xueyi.dao.Dao;
+import com.bikeapp.xueyi.dao.DbUser;
 import com.bikeapp.xueyi.mybikeapp.MainActivity;
 import com.bikeapp.xueyi.mybikeapp.R;
 
@@ -22,6 +24,10 @@ public class MineFragment extends Fragment {
     @OnClick(R.id.bt_exit_login)
     void exit_login(View v) {
         startActivity(new Intent(mContext, MainActivity.class));
+        DbUser dbUser = Dao.findOne(DbUser.class, "1");
+        dbUser.setHasLogin(false);
+        Dao.save(dbUser);
+        getActivity().finish();
     }
 
     @Override

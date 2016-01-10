@@ -10,9 +10,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
+import com.bikeapp.xueyi.dao.Dao;
+import com.bikeapp.xueyi.dao.DbUser;
 import com.bikeapp.xueyi.domain.User;
 import com.bikeapp.xueyi.service.CallService;
 
@@ -59,6 +63,9 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.et_passward)
     TextView et_passward;
 
+    @Bind(R.id.cb_remember)
+    CheckBox remember;
+
     /**
      * 登录失败的toast
      */
@@ -90,8 +97,15 @@ public class MainActivity extends BaseActivity {
                                  User userBack = response.body();
                                  if (userBack != null && !TextUtils.isEmpty(userBack.getId())) {
                                      startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                                     Dao.cleanAll(DbUser.class);
+                                     //id不能为空
+                                     userBack.setPassword(password);
+                                     DbUser dbUser = DbUser.builder().id("1").user(userBack).hasLogin(true).isChekbox(false).build();
+                                     if (remember.isChecked()) {
+                                         dbUser.setIsChekbox(true);
+                                     }
+                                     Dao.save(dbUser);
                                  }
-                                 Log.d(TAG, userBack.toString());
                              }
 
                              @Override
@@ -100,6 +114,7 @@ public class MainActivity extends BaseActivity {
                              }
                          }
         );
+       finish();
     }
 
     /**
@@ -117,9 +132,19 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        ActiveAndroid.initialize(this);
         mToolbar.setTitle(login);
         setSupportActionBar(mToolbar);
+
+        DbUser dbUser=Dao.findOne(DbUser.class,"1");
+        if(dbUser!=null&&dbUser.getIsChekbox()){
+            remember.setChecked(true);
+            et_userName.setText(dbUser.getUser().getUserName());
+            et_passward.setText(dbUser.getUser().getPassword());
+        } else {
+            et_userName.setText("");
+            et_passward.setText("");
+        }
     }
 
     @Override

@@ -48,6 +48,19 @@
         <activity
             android:name=".SinglePlayActivity"
             android:label="@string/title_activity_single_play"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="MyBikeApp.db" />
+
+        <meta-dataA
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+
+        <activity
+            android:name=".JumpActivity"
+            android:label="@string/title_activity_jump"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
