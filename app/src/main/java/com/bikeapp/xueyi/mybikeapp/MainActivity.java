@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.ActiveAndroid;
 import com.bikeapp.xueyi.dao.Dao;
 import com.bikeapp.xueyi.dao.DbUser;
 import com.bikeapp.xueyi.domain.User;
@@ -96,11 +95,12 @@ public class MainActivity extends BaseActivity {
                              public void onResponse(Response<User> response, Retrofit retrofit) {
                                  User userBack = response.body();
                                  if (userBack != null && !TextUtils.isEmpty(userBack.getId())) {
-                                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                                      Dao.cleanAll(DbUser.class);
                                      //id不能为空
                                      userBack.setPassword(password);
-                                     DbUser dbUser = DbUser.builder().id("1").user(userBack).hasLogin(true).isChekbox(false).build();
+                                     DbUser dbUser = DbUser.builder().id("1").user(userBack).hasLogin(false).isChekbox(false).build();
+                                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                                     dbUser.setHasLogin(true);
                                      if (remember.isChecked()) {
                                          dbUser.setIsChekbox(true);
                                      }
@@ -132,7 +132,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        ActiveAndroid.initialize(this);
         mToolbar.setTitle(login);
         setSupportActionBar(mToolbar);
 

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bikeapp.xueyi.config.Consts;
-import com.bikeapp.xueyi.domain.PlayGuide;
+import com.bikeapp.xueyi.domain.CampusNews;
 import com.bikeapp.xueyi.mybikeapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -18,12 +18,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-
 /**
  * Created by XUEYI on 2015/12/10.
  */
 
-public class MyAdapterRecyPlayGuide extends RecyclerView.Adapter<MyAdapterRecyPlayGuide.ViewHolder> {
+public class MyAdapterNewsRecy extends RecyclerView.Adapter<MyAdapterNewsRecy.ViewHolder> {
 
     /**
      * ItemClick的回调接口
@@ -41,12 +40,13 @@ public class MyAdapterRecyPlayGuide extends RecyclerView.Adapter<MyAdapterRecyPl
     }
 
 
-    private List<PlayGuide> mDataset;
+    private List<CampusNews> mDataset;
     private Context context;
 
-    public MyAdapterRecyPlayGuide(List<PlayGuide> dataset, Context context) {
+    public MyAdapterNewsRecy(List<CampusNews> dataset, Context context) {
+        super();
         this.context = context;
-        this.mDataset = dataset;
+        mDataset = dataset;
     }
 
 
@@ -54,7 +54,7 @@ public class MyAdapterRecyPlayGuide extends RecyclerView.Adapter<MyAdapterRecyPl
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // 创建一个View，简单起见直接使用系统提供的布局，就是一个TextView
 //        View view = View.inflate(viewGroup.getContext(), R.layout.news_item, null);
-        View view = LayoutInflater.from(context).inflate(R.layout.play_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.news_item, viewGroup, false);
         // 创建一个ViewHolder
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -62,18 +62,18 @@ public class MyAdapterRecyPlayGuide extends RecyclerView.Adapter<MyAdapterRecyPl
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        PlayGuide playGuide = mDataset.get(i);
+        CampusNews campusNews = mDataset.get(i);
         // 绑定数据到ViewHolder上
-        viewHolder.title.setText(playGuide.getTitle());
-        viewHolder.context.setText(playGuide.getSummary());
-        if (playGuide.getTitleImage() == null) {
+        viewHolder.newsTitle.setText(campusNews.getTitle());
+        viewHolder.newsDateTime.setText(campusNews.getCreateTime().toString());
+        if (campusNews.getTitleImage() == null) {
             Picasso.with(context)
-                    .load(R.drawable.tab_menu_find)
-                    .into(viewHolder.icon);
+                    .load(R.mipmap.ic_launcher)
+                    .into(viewHolder.newsImage);
         } else {
             Picasso.with(context)
-                    .load(Consts.URL_IMAGE + playGuide.getTitleImage().getDownload())
-                    .into(viewHolder.icon);
+                    .load(Consts.URL_IMAGE + campusNews.getTitleImage().getDownload())
+                    .into(viewHolder.newsImage);
         }
 
         //如果设置了回调，则设置点击事件
@@ -94,15 +94,14 @@ public class MyAdapterRecyPlayGuide extends RecyclerView.Adapter<MyAdapterRecyPl
         return mDataset.size();
     }
 
-
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.txt_title)
-        TextView title;
-        @Bind(R.id.txt_context)
-        TextView context;
-        @Bind(R.id.img_icon)
-        ImageView icon;
+        @Bind(R.id.tv_newsTitle)
+        TextView newsTitle;
+        @Bind(R.id.tv_newsDateTime)
+        TextView newsDateTime;
+        @Bind(R.id.iv_newsImage)
+        ImageView newsImage;
 
         public ViewHolder(View itemView) {
             super(itemView);

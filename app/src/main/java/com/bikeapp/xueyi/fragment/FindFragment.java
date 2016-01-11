@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bikeapp.xueyi.adapter.MyFindAdapter;
 import com.bikeapp.xueyi.config.Consts;
 import com.bikeapp.xueyi.dto.Icon;
-import com.bikeapp.xueyi.mybikeapp.CampusNewsActivity;
+import com.bikeapp.xueyi.mybikeapp.NewsActivity;
 import com.bikeapp.xueyi.mybikeapp.PlayGuideActivity;
 import com.bikeapp.xueyi.mybikeapp.R;
 import com.bikeapp.xueyi.mybikeapp.StudyGuideActivity;
@@ -98,7 +98,7 @@ public class FindFragment extends Fragment {
         String name = mData.get(position).getName();
         switch (position) {
             case Consts.PAGE_ONE:
-                startActivity(new Intent(mContext, CampusNewsActivity.class));
+                startActivity(new Intent(mContext, NewsActivity.class));
                 break;
             case Consts.PAGE_FOUR:
                 Intent intent1 = new Intent(mContext, StudyGuideActivity.class);

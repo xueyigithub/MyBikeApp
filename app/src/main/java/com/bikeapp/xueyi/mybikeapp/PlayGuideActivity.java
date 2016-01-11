@@ -34,12 +34,10 @@ import retrofit.Retrofit;
 public class PlayGuideActivity extends BaseActivity {
     private static final String TAG = "PlayGuideActivity";
     private int i = 0;
-    private String city=CityEnum.Jinhua.toString();
+    private String city = CityEnum.Jinhua.toString();
     private List<PlayGuide> playGuides = new ArrayList<>();
     private MyAdapterRecyPlayGuide adapter;
     private String name;
-
-
     @Bind(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
 
@@ -94,24 +92,24 @@ public class PlayGuideActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         adapter = new MyAdapterRecyPlayGuide(playGuides, PlayGuideActivity.this);
         adapter.setOnItemClickLitener(new MyAdapterRecyPlayGuide.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
                 String title = playGuides.get(position).getTitle();
-                String content=playGuides.get(position).getContent();
-                singPlayActivity(title,content);
+                String content = playGuides.get(position).getContent();
+                singPlayActivity(title, content);
             }
         });
 
         mRecyclerView.setAdapter(adapter);
     }
 
-    private void singPlayActivity(String title,String content){
-        Intent intent=new Intent(PlayGuideActivity.this,SinglePlayActivity.class);
-        intent.putExtra("title",title);
-        intent.putExtra("content",content);
+    private void singPlayActivity(String title, String content) {
+        Intent intent = new Intent(PlayGuideActivity.this, SinglePlayActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("content", content);
         startActivity(intent);
     }
 
@@ -163,8 +161,8 @@ public class PlayGuideActivity extends BaseActivity {
         return true;
     }
 
-    private boolean changCity(CityEnum myCity){
-        city=myCity.toString();
+    private boolean changCity(CityEnum myCity) {
+        city = myCity.toString();
         initPlayGuide();
         adapter.notifyDataSetChanged();
         return true;
